@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://iota113.github.io)]
 [[github](https://github.com/iota113)]
-[[portfolio](http://iota113.github.io))]
+[[portfolio](http://iota113.github.io)]
 
 * Role: Deliverables and deadlines, Scheduling and tracking
 * Responsibilities: Model, Logic
@@ -30,6 +30,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
+
 ### Shana Nadia Sjariffudin
 
 <img src="images/shana-nadia.png" width="200px">
@@ -40,34 +41,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Member
 * Responsibilities: In charge of Storage
 * 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
 
 ### Sean Sukamto
 
@@ -77,3 +50,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Elliot Yong
+
+<img src="images/yytelliot.png" width="200px">
+
+[[homepage](https://www.linkedin.com/in/elliot-yong-b69526348)]
+[[github](https://github.com/yytelliot)]
+[[portfolio](https://github.com/yytelliot)]
+
+* Role: Code quality, git expert
+* Responsibilities: In charge of model
+
