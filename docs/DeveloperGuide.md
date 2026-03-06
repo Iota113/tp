@@ -1,7 +1,10 @@
 ---
 layout: page
-title: Developer Guide
+title: OnlyTutors Developer Guide
 ---
+
+# OnlyTutors Developer Guide
+
 * Table of Contents
 {:toc}
 
@@ -288,30 +291,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `OnlyTutors` and the **Actor** is the `tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 01: Add a student**
+
+**Guarantees:**
+* A student is added if and only if all required parameters are valid and is not a duplicate
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Tutor enters the command to add a student
+2. OnlyTutors saves the changes and shows confirmation.
 
     Use case ends.
 
 **Extensions**
+* 1a. OnlyTutors detects missing or invalid parameter
+  * 1a1. OnlyTutors shows an error message.
+  
+      Use case ends.
 
-* 2a. The list is empty.
+* 1b. OnlyTutors detects a duplicate student (based on name and phone number)
+  * 1b1. OnlyTutors rejects the add and gives a warning. 
+  
+    Use case ends
 
-  Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
 
 *{More to be added}*
 
