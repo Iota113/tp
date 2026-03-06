@@ -262,27 +262,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Private Tutors
+* Has a need to manage details of multiple students
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Private tutors have many different things to keep track of. Not many apps out there that can do everything on its own; and so tutors usually need multiple apps. OnlyTutors alleviate this by maintaining various things tutors need: names, address, date & time of lessons and payment status.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                  | I want to …​                                                      | So that I can…​                                               |
+|----------|--------------------------|-------------------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | new tutor                | see usage instructions                                            | refer to instructions when I forget how to use the App        |
+| `* * *`  | tutor                    | add a student                                                     |                                                               |
+| `* * *`  | tutor                    | delete students whom I no longer teach                            | remove clutter and keep my list up-to-date                    |
+| `* * *`  | busy tutor               | see all upcoming lessons                                          | plan my days efficiently                                      |
+| `* * *`  | travelling tutor         | record lesson's location                                          | know where to go                                              |
+| `* * *`  | organized tutor          | see my students' level and subjects                               | prepare and bring the appropriate materials                   |
+| `* * *`  | miserly tutor            | record tuition rates and payment status                           | track my income properly                                      |
+| `* *`    | careless tutor           | undo my actions                                                   | recover my mistakes                                           |
+| `* *`    | humble tutor             | edit my students' information easily                              | correct any wrong or outdated contact info without hassle     |
+| `* *`    | tutor with many students | filter students by tags                                           | quickly find a specific group of students                     |
+| `* *`    | tutor                    | export and import my data                                         | backup or switch devices                                      |
+| `*`      | analytical tutor         | view a summary of my monthly teaching hours and income            | evaluate my profile and workload                              |
+| `*`      | busy tutor               | get quick message templates (e.g., “running 10 mins late”)        | message efficiently                                           |
+| `*`      | tutor                    | mark student whether they are currently taking lesson or on break | they don't cutter my list but I also don't have to delete them |
 
 *{More to be added}*
 
