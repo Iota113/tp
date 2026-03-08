@@ -354,7 +354,7 @@ Use case ends.
 * If no students exist, displays an empty list message.
 
 **MSS**
-1. Tutor enters the command list.
+1. Tutor enters the command list to list all students.
 2. OnlyTutors retrieves all student contacts from the system.
 3. OnlyTutors displays the list of students with all relevant details.
 
