@@ -328,6 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case ends
 
+
 **Use case 02: Delete a student**
 
 **Guarantees**
@@ -345,6 +346,7 @@ Use case ends.
   *  1a1. OnlyTutors shows an error message.
   
      Use case ends.
+
 
 **Use case 03: List all students**
 
@@ -371,6 +373,66 @@ Use case ends.
   
         Use case ends.
 
+
+**Use case 04: Tag a student**
+
+**Guarantees**
+* Tags are added to a student if and only if the `INDEX` parameter is valid and all `TAG` parameters are valid.
+
+**MSS**
+1. Tutor enters the command to tag a student.
+2. OnlyTutors adds the specified tag(s) to the student at the given index.
+3. OnlyTutors shows a confirmation message with the updated student's information.
+
+Use case ends.
+
+**Extensions**
+* 1a. OnlyTutors detects a missing, invalid or non-integer index
+  * 1a1. OnlyTutors shows an error message.
+
+    Use case ends.
+
+* 1b. OnlyTutors detects a missing or invalid tag
+  * 1b1. OnlyTutors shows an error message.
+
+    Use case ends.
+
+* 2a. OnlyTutors detects that one or more tags already exist on the student
+  * 2a1. OnlyTutors ignores the duplicate tag(s) and adds only new tag(s).
+  * 2a2. OnlyTutors informs the tutor that the duplicate tags already exist on the student
+
+    Use case ends.
+    
+
+**Use case 05: Delete tags from a student**
+
+**Guarantees**
+* Tags are removed from a student if and only if the `INDEX` parameter is valid and all specified `TAG` parameters exist for that student.
+
+**MSS**
+1. Tutor enters the command to delete tags from a student.
+2. OnlyTutors removes the specified tag(s) from the student at the given index.
+3. OnlyTutors shows a confirmation message with the updated student's information.
+
+Use case ends.
+
+**Extensions**
+* 1a. OnlyTutors detects a missing, invalid or non-integer index
+  * 1a1. OnlyTutors shows an error message.
+
+    Use case ends.
+
+* 1b. OnlyTutors detects a missing or invalid tag
+  * 1b1. OnlyTutors shows an error message.
+
+    Use case ends.
+
+* 2a. OnlyTutors detects that one or more specified tags do not exist on the student
+  * 2a1. OnlyTutors shows an error message.
+
+    Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -385,6 +447,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tag**: A label attached to a student to help tutors categorize or filter students, such as `Math`, `Sec4`, or `ExamPrep`
 
 --------------------------------------------------------------------------------------------------------------------
 
