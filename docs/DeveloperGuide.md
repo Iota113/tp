@@ -437,11 +437,20 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+| # | Category | Requirement |
+|---|----------|-------------|
+| 1 | Portability | Should work on any mainstream OS (Windows, Linux, macOS) as long as it has Java 17 or above installed. |
+| 2 | Standalone | Should work as a standalone application without requiring an installer. The app should be packaged as a single JAR file. |
+| 3 | Performance | Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. |
+| 4 | Response Time | Any command should complete and display results within 3 seconds under normal operating conditions. |
+| 5 | CLI Efficiency | A user with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse. |
+| 6 | Usability | A tutor with no prior technical background should be able to use the core features of the app after reading the user guide. |
+| 7 | Data Storage | All data should be stored locally in a human-editable text file, not in a database management system. |
+| 8 | Single User | The application is designed for a single user and does not need to support multiple concurrent users. |
+| 9 | Offline | Should be fully functional without requiring an internet connection. |
+| 10 | Display | Should display properly on screens with resolutions of 1920x1080 or higher at 100% and 125% scaling, and usable on screens with resolutions of 1280x720 or higher at 150% scaling. |
+| 11 | File Size | The final packaged JAR file should not exceed 100MB. Documentation PDF files should not exceed 15MB each. |
+| 12 | PDF-Friendly | The Developer Guide and User Guide should be PDF-friendly (no expandable panels, embedded videos, or animated GIFs). |
 
 ### Glossary
 
