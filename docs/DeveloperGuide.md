@@ -317,9 +317,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. OnlyTutors detects missing or invalid parameter
-  * 1a1. OnlyTutors shows an error message.
-  
-      Use case ends.
+  * 1a1. OnlyTutors shows an error message. 
+    
+    Use case ends.
 
 * 1b. OnlyTutors detects a duplicate student (based on name and phone number)
   * 1b1. OnlyTutors rejects the add and gives a warning. 
@@ -337,13 +337,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. OnlyTutors deletes the student at the specified index.
 3. OnlyTutors shows a confirmation message with the deleted student's information.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 * 1a. OnlyTutors detects a missing, invalid or non-integer index
   *  1a1. OnlyTutors shows an error message.
-  
-     Use case ends.
+
+        Use case ends
 
 
 **Use case 03: List all students**
@@ -358,7 +358,7 @@ Use case ends.
 2. OnlyTutors retrieves all student contacts from the system.
 3. OnlyTutors displays the list of students with all relevant details.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 * 1a. OnlyTutors detects an unknown command or typo
@@ -382,7 +382,7 @@ Use case ends.
 2. OnlyTutors adds the specified tag(s) to the student at the given index.
 3. OnlyTutors shows a confirmation message with the updated student's information.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 * 1a. OnlyTutors detects a missing, invalid or non-integer index
@@ -412,7 +412,7 @@ Use case ends.
 2. OnlyTutors removes the specified tag(s) from the student at the given index.
 3. OnlyTutors shows a confirmation message with the updated student's information.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 * 1a. OnlyTutors detects a missing, invalid or non-integer index

@@ -45,24 +45,24 @@ public class DayTest {
 
     @Test
     public void equals() {
-        Day Day = new Day("Friday");
+        Day day = new Day("Friday");
 
         // same values -> returns true
-        assertTrue(Day.equals(new Day("Friday")));
+        assertTrue(day.equals(new Day("Friday")));
 
         // case-insensitive test
-        assertTrue(Day.equals(new Day("friday")));
+        assertTrue(day.equals(new Day("friday")));
 
         // same object -> returns true
-        assertTrue(Day.equals(Day));
+        assertTrue(day.equals(day));
 
         // null -> returns false
-        assertFalse(Day.equals(null));
+        assertFalse(day.equals(null));
 
         // different types -> returns false
-        assertFalse(Day.equals(5.0f));
+        assertFalse(day.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Day.equals(new Day("Monday")));
+        assertFalse(day.equals(new Day("Monday")));
     }
 }

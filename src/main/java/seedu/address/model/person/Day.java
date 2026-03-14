@@ -8,6 +8,7 @@ import java.util.Arrays;
 /**
  * Represents a Day in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
+ * value of day is stored internally in upper case.
  */
 public class Day {
 
@@ -25,7 +26,7 @@ public class Day {
     public Day(String day) {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        value = day.toLowerCase();
+        value = day.toUpperCase();
     }
 
     /**

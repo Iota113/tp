@@ -1,0 +1,13 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "phone": "81234567",
+    "email": "hans@email.com",
+    "address": "4th street",
+    "day" : "Weekends",
+    "startTime" : "20:00",
+    "endTime" : "22:00",
+    "rate" : "50",
+    "tags" : [ "owesMoney", "friends" ]
+  } ]
+}
