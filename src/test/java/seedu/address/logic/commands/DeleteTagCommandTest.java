@@ -65,6 +65,7 @@ public class DeleteTagCommandTest {
         Set<Tag> secondTags = Set.of(new Tag("teammate"));
         DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, firstTags);
         DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(INDEX_SECOND_PERSON, secondTags);
+        DeleteTagCommand deleteFirstCommandDifferentTags = new DeleteTagCommand(INDEX_FIRST_PERSON, secondTags);
 
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
@@ -73,7 +74,17 @@ public class DeleteTagCommandTest {
 
         assertFalse(deleteFirstCommand.equals(1));
         assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(deleteFirstCommand.equals(deleteFirstCommandDifferentTags));
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, tagsToDelete);
+        DeleteTagCommand deleteTagCommandCopy = new DeleteTagCommand(INDEX_FIRST_PERSON, tagsToDelete);
+
+        assertEquals(deleteTagCommand.hashCode(), deleteTagCommandCopy.hashCode());
     }
 
     @Test

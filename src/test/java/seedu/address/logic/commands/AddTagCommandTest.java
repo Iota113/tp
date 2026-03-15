@@ -57,6 +57,7 @@ public class AddTagCommandTest {
         Set<Tag> secondTags = Set.of(new Tag("teammate"));
         AddTagCommand addFirstCommand = new AddTagCommand(INDEX_FIRST_PERSON, firstTags);
         AddTagCommand addSecondCommand = new AddTagCommand(INDEX_SECOND_PERSON, secondTags);
+        AddTagCommand addFirstCommandDifferentTags = new AddTagCommand(INDEX_FIRST_PERSON, secondTags);
 
         assertTrue(addFirstCommand.equals(addFirstCommand));
 
@@ -65,7 +66,17 @@ public class AddTagCommandTest {
 
         assertFalse(addFirstCommand.equals(1));
         assertFalse(addFirstCommand.equals(null));
+        assertFalse(addFirstCommand.equals(addFirstCommandDifferentTags));
         assertFalse(addFirstCommand.equals(addSecondCommand));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
+        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        AddTagCommand addTagCommandCopy = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+
+        assertEquals(addTagCommand.hashCode(), addTagCommandCopy.hashCode());
     }
 
     @Test

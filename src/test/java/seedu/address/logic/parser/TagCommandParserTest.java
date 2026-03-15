@@ -41,4 +41,10 @@ public class TagCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommandParser.MESSAGE_USAGE);
         assertParseFailure(parser, "update 1" + TAG_DESC_FRIEND, expectedMessage);
     }
+
+    @Test
+    public void parse_invalidSubcommandWithoutArgs_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommandParser.MESSAGE_USAGE);
+        assertParseFailure(parser, "update", expectedMessage);
+    }
 }
