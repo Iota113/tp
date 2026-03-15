@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import java.util.Set;
@@ -18,15 +16,15 @@ import seedu.address.model.tag.Tag;
 /**
  * Deletes tag(s) from an existing person in the address book.
  */
-public class DeleteTagCommand extends Command {
+public class DeleteTagCommand extends TagCommand {
 
-	public static final String COMMAND_WORD = "tag delete";
+	public static final String COMMAND_WORD = "delete";
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes tag(s) from a person in the address book. "
 			+ "Parameters: "
 			+ "INDEX (must be a positive integer) "
 			+ PREFIX_TAG + "TAG (must be a non-empty string)\n"
-			+ "Example: " + COMMAND_WORD + " "
+			+ "Example: " + TagCommand.COMMAND_WORD + " " + COMMAND_WORD + " "
 			+ "1 "
 			+ PREFIX_TAG + "Primary1 "
 			+ PREFIX_TAG + "Mathematics";
@@ -34,30 +32,18 @@ public class DeleteTagCommand extends Command {
 	public static final String MESSAGE_SUCCESS = "Tag(s) removed from person: %1$s";
 	public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist for this person.";
 
-	private final Index targetIndex;
-	private final Set<Tag> tagsToDelete;
-
 	public DeleteTagCommand(Index targetIndex, Set<Tag> tagsToDelete) {
-		requireNonNull(targetIndex);
-		requireNonNull(tagsToDelete);
-		this.targetIndex = targetIndex;
-		this.tagsToDelete = new HashSet<>(tagsToDelete);
+		super(targetIndex, tagsToDelete);
 	}
 
 	@Override
 	public CommandResult execute(Model model) throws CommandException {
 		requireNonNull(model);
-		List<Person> lastShownList = model.getFilteredPersonList();
-
-		if (targetIndex.getZeroBased() >= lastShownList.size()) {
-			throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-		}
-
-		Person personToUpdate = lastShownList.get(targetIndex.getZeroBased());
-		if (!personToUpdate.getTags().containsAll(tagsToDelete)) {
+		Person personToUpdate = getTargetPerson(model);
+		if (!personToUpdate.getTags().containsAll(getTags())) {
 			throw new CommandException(MESSAGE_TAG_NOT_FOUND);
 		}
-		model.deleteTagsFromPerson(personToUpdate, tagsToDelete);
+		model.deleteTagsFromPerson(personToUpdate, getTags());
 		return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToUpdate)));
 	}
 
@@ -72,20 +58,20 @@ public class DeleteTagCommand extends Command {
 		}
 
 		DeleteTagCommand otherDeleteTagCommand = (DeleteTagCommand) other;
-		return targetIndex.equals(otherDeleteTagCommand.targetIndex)
-				&& tagsToDelete.equals(otherDeleteTagCommand.tagsToDelete);
+		return getTargetIndex().equals(otherDeleteTagCommand.getTargetIndex())
+				&& getTags().equals(otherDeleteTagCommand.getTags());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(targetIndex, tagsToDelete);
+		return Objects.hash(getTargetIndex(), getTags());
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
-				.add("targetIndex", targetIndex)
-				.add("tagsToDelete", tagsToDelete)
+				.add("targetIndex", getTargetIndex())
+				.add("tagsToDelete", getTags())
 				.toString();
 	}
 
