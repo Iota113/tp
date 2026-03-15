@@ -29,6 +29,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label entryHeader;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -37,7 +39,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label lesson;
+    @FXML
+    private Label rate;
     @FXML
     private FlowPane tags;
 
@@ -47,11 +51,25 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        entryHeader.setText("ENTRY " + displayedIndex);
+        id.setText(String.valueOf(displayedIndex));
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+
+        if (person.getDay() != null && person.getStartTime() != null && person.getEndTime() != null) {
+            lesson.setText("Lesson: " + person.getDay().value + " "
+                    + person.getStartTime().value + "-" + person.getEndTime().value);
+        } else {
+            lesson.setText("");
+        }
+
+        if (person.getRate() != null) {
+            rate.setText(person.getRate().value);
+        } else {
+            rate.setText("");
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -10,27 +10,61 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+  <VBox HBox.hgrow="ALWAYS">
+    <Label fx:id="entryHeader" id="entryHeader" />
+    <GridPane id="cardContent" styleClass="card-content">
       <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
+        <Insets top="8" right="12" bottom="8" left="12" />
       </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
+      <columnConstraints>
+        <ColumnConstraints minWidth="50" prefWidth="60" hgrow="NEVER" />
+        <ColumnConstraints minWidth="100" prefWidth="160" hgrow="SOMETIMES" />
+        <ColumnConstraints minWidth="120" prefWidth="200" hgrow="ALWAYS" />
+        <ColumnConstraints minWidth="80" prefWidth="100" hgrow="NEVER" />
+      </columnConstraints>
+
+      <!-- Column 0: Index -->
+      <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
+        <Label text="Index:" styleClass="field-label" />
+        <Label fx:id="id" styleClass="index-label">
           <minWidth>
-            <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
+      </VBox>
+
+      <!-- Column 1: Name + Phone -->
+      <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="2">
+        <padding>
+          <Insets left="8" />
+        </padding>
+        <Label text="Name:" styleClass="field-label" />
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-    </VBox>
-  </GridPane>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </VBox>
+
+      <!-- Column 2: Address + Lesson -->
+      <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
+        <padding>
+          <Insets left="8" />
+        </padding>
+        <Label text="Address:" styleClass="field-label" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+        <Label fx:id="lesson" styleClass="cell_small_label" text="\$lesson" />
+        <HBox spacing="3">
+          <Label text="Tags:" styleClass="field-label" />
+          <FlowPane fx:id="tags" />
+        </HBox>
+      </VBox>
+
+      <!-- Column 3: Rate -->
+      <VBox alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.rowSpan="2">
+        <padding>
+          <Insets left="8" />
+        </padding>
+        <Label text="Rate:" styleClass="field-label" />
+        <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
+      </VBox>
+    </GridPane>
+  </VBox>
 </HBox>
