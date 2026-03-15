@@ -25,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kimyungju.png" width="200px">
 
 [[github](https://github.com/kimyungju)]
-[[portfolio](team/kimyungju.md)]
+[[portfolio](https://www.linkedin.com/in/yungju)]
 
 * Role: Developer
 * Responsibilities: UI
