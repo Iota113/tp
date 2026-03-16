@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label email;
+    @FXML
     private Label lesson;
     @FXML
     private Label rate;
@@ -55,6 +57,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(String.valueOf(displayedIndex));
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        email.setText(person.getEmail().value);
         address.setText(person.getAddress().value);
 
         if (person.getDay() != null && person.getStartTime() != null && person.getEndTime() != null) {
