@@ -64,7 +64,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
 import seedu.address.model.person.Time;
-
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
