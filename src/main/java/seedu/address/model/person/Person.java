@@ -27,6 +27,7 @@ public class Person {
     private final Time startTime;
     private final Time endTime;
     private final Rate rate;
+    private final boolean isPaid;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -43,13 +44,23 @@ public class Person {
         this.startTime = null;
         this.endTime = null;
         this.rate = null;
+        this.isPaid = false;
     }
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Payment status defaults to unpaid.
      */
     public Person(Name name, Phone phone, Email email, Address address, Day day,
                   Time startTime, Time endTime, Rate rate, Set<Tag> tags) {
+        this(name, phone, email, address, day, startTime, endTime, rate, false, tags);
+    }
+
+    /**
+     * Every field must be present and not null. Accepts an explicit {@code isPaid} status.
+     * Used when constructing a Person with a known payment state (e.g. Mark/Unmark commands).
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Day day,
+                  Time startTime, Time endTime, Rate rate, boolean isPaid, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, day, startTime, endTime, rate, tags);
         this.name = name;
         this.phone = phone;
@@ -59,6 +70,7 @@ public class Person {
         this.startTime = startTime;
         this.endTime = endTime;
         this.rate = rate;
+        this.isPaid = isPaid;
         this.tags.addAll(tags);
     }
 
@@ -92,6 +104,10 @@ public class Person {
 
     public Rate getRate() {
         return rate;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
     }
 
     /**
@@ -136,13 +152,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && isPaid == otherPerson.isPaid
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, isPaid, tags);
     }
 
     @Override
@@ -152,6 +169,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("isPaid", isPaid)
                 .add("tags", tags)
                 .toString();
     }

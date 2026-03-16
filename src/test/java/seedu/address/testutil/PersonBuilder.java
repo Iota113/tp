@@ -37,6 +37,7 @@ public class PersonBuilder {
     private Time endTime;
     private Rate rate;
     private Set<Tag> tags;
+    private boolean isPaid;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,6 +51,7 @@ public class PersonBuilder {
         startTime = new Time(DEFAULT_START_TIME);
         endTime = new Time(DEFAULT_END_TIME);
         rate = new Rate(DEFAULT_RATE);
+        isPaid = false;
         tags = new HashSet<>();
     }
 
@@ -65,6 +67,7 @@ public class PersonBuilder {
         startTime = personToCopy.getStartTime();
         endTime = personToCopy.getEndTime();
         rate = personToCopy.getRate();
+        isPaid = personToCopy.isPaid();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -140,8 +143,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isPaid} status of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaid(boolean isPaid) {
+        this.isPaid = isPaid;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, day, startTime, endTime, rate, tags);
+        return new Person(name, phone, email, address, day, startTime, endTime, rate, isPaid, tags);
     }
 
 }
