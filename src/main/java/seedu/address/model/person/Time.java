@@ -32,6 +32,17 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isAfter(Time other) {
+        String[] thisParts = value.split("");
+        String [] otherParts = other.value.split("");
+        int thisHour = Integer.parseInt(thisParts[0]);
+        int thisMin = Integer.parseInt(thisParts[1]);
+        int otherHour = Integer.parseInt(otherParts[0]);
+        int otherMin = Integer.parseInt(otherParts[1]);
+
+        return thisHour > otherHour || (thisHour == otherHour && thisMin > otherMin);
+    }
+
     @Override
     public String toString() {
         return value;
