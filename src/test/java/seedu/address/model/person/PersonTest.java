@@ -94,6 +94,22 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different day -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDay(VALID_DAY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different start time -> returns false
+        editedAlice = new PersonBuilder(ALICE).withStartTime(VALID_START_TIME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different end time -> returns false
+        editedAlice = new PersonBuilder(ALICE).withEndTime(VALID_END_TIME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different rate -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRate(VALID_RATE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
