@@ -40,9 +40,9 @@ public class CommandTestUtil {
     public static final String VALID_DAY_AMY = "Friday";
     public static final String VALID_DAY_BOB = "Monday";
     public static final String VALID_START_TIME_AMY = "16:00";
-    public static final String VALID_START_TIME_BOB = "19:00";
+    public static final String VALID_START_TIME_BOB = "10:00";
     public static final String VALID_END_TIME_AMY = "18:00";
-    public static final String VALID_END_TIME_BOB = "21:00";
+    public static final String VALID_END_TIME_BOB = "12:00";
     public static final String VALID_RATE_AMY = "40";
     public static final String VALID_RATE_BOB = "50";
     public static final String VALID_TAG_HUSBAND = "husband";

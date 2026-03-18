@@ -37,6 +37,11 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Day day,
                   Time startTime, Time endTime, Rate rate, boolean isPaid, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, day, startTime, endTime, rate, tags);
+
+        if (!endTime.isAfter(startTime)) {
+            throw new IllegalArgumentException(Time.MESSAGE_CONSTRAINTS);
+        }
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -138,8 +143,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, day, startTime, endTime,
-                rate, isPaid, tags);
+        return Objects.hash(name, phone, email, address,
+                day, startTime, endTime, rate, isPaid, tags);
     }
 
     @Override
