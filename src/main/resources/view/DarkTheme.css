@@ -395,6 +395,18 @@
     -fx-background-radius: 0;
 }
 
+.payment-paid {
+    -fx-text-fill: #2e7d32;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 11px;
+}
+
+.payment-unpaid {
+    -fx-text-fill: #c62828;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 11px;
+}
+
 #tags {
     -fx-hgap: 5;
     -fx-vgap: 3;

@@ -35,6 +35,7 @@ class JsonAdaptedPerson {
     private final String startTime;
     private final String endTime;
     private final String rate;
+    private final boolean isPaid;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,6 +46,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("day") String day, @JsonProperty("startTime") String startTime,
                              @JsonProperty("endTime") String endTime, @JsonProperty("rate") String rate,
+                             @JsonProperty("isPaid") boolean isPaid,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -54,6 +56,7 @@ class JsonAdaptedPerson {
         this.startTime = startTime;
         this.endTime = endTime;
         this.rate = rate;
+        this.isPaid = isPaid;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -71,6 +74,7 @@ class JsonAdaptedPerson {
         startTime = source.getStartTime().value;
         endTime = source.getEndTime().value;
         rate = source.getRate().value;
+        isPaid = source.isPaid();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -153,7 +157,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelDay, modelStartTime, modelEndTime, modelRate, false, modelTags);
+                modelDay, modelStartTime, modelEndTime, modelRate, isPaid, modelTags);
     }
 
 }

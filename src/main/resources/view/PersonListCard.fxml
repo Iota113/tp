@@ -65,6 +65,7 @@
         </padding>
         <Label text="Rate:" styleClass="field-label" />
         <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
+        <Label fx:id="paymentStatus" styleClass="cell_small_label" />
       </VBox>
     </GridPane>
   </VBox>
