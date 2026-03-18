@@ -33,13 +33,20 @@ public class AddTagCommandTest {
         Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
         AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
-
         String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, Messages.format(personToTag));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTagsToPerson(personToTag, tagsToAdd);
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_tagAlreadyExists_throwsCommandException() {
+        Set<Tag> tagsToAdd = Set.of(new Tag("friends"));
+        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+
+        assertCommandFailure(addTagCommand, model, AddTagCommand.MESSAGE_TAG_ALREADY_EXISTS);
     }
 
     @Test

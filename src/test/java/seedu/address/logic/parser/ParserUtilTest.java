@@ -240,6 +240,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_mixedCaseValue_returnsLowerCaseTag() throws Exception {
+        String mixedCaseTag = "FrIeNdS";
+        Tag expectedTag = new Tag("friends");
+        assertEquals(expectedTag, ParserUtil.parseTag(mixedCaseTag));
+    }
+
+    @Test
     public void parseTags_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
     }
@@ -258,6 +265,14 @@ public class ParserUtilTest {
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTags_collectionWithCaseVariants_returnsDeduplicatedTagSet() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList("friends", "FRIENDS", "FrIeNdS"));
+        Set<Tag> expectedTagSet = Set.of(new Tag("friends"));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
