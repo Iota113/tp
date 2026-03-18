@@ -22,10 +22,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rate;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,9 +102,15 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Day updatedDay = editPersonDescriptor.getDay().orElse(personToEdit.getDay());
+        Time updatedStartTime = editPersonDescriptor.getStartTime().orElse(personToEdit.getStartTime());
+        Time updatedEndTime = editPersonDescriptor.getEndTime().orElse(personToEdit.getEndTime());
+        Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
+        boolean updatedIsPaid = editPersonDescriptor.getIsPaid().orElse(personToEdit.isPaid());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedDay, updatedStartTime, updatedEndTime, updatedRate, updatedIsPaid, updatedTags);
     }
 
     @Override
@@ -137,6 +146,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Day day;
+        private Time startTime;
+        private Time endTime;
+        private Rate rate;
+        private Boolean isPaid;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -150,14 +164,18 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setDay(toCopy.day);
+            setStartTime(toCopy.startTime);
+            setEndTime(toCopy.endTime);
+            setRate(toCopy.rate);
+            setIsPaid(toCopy.isPaid);
             setTags(toCopy.tags);
         }
-
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, day, startTime, endTime, rate, tags);
         }
 
         public void setName(Name name) {
@@ -190,6 +208,46 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setDay(Day day) {
+            this.day = day;
+        }
+
+        public Optional<Day> getDay() {
+            return Optional.ofNullable(day);
+        }
+
+        public void setStartTime(Time startTime) {
+            this.startTime = startTime;
+        }
+
+        public Optional<Time> getStartTime() {
+            return Optional.ofNullable(startTime);
+        }
+
+        public void setEndTime(Time endTime) {
+            this.endTime = endTime;
+        }
+
+        public Optional<Time> getEndTime() {
+            return Optional.ofNullable(endTime);
+        }
+
+        public void setRate(Rate rate) {
+            this.rate = rate;
+        }
+
+        public Optional<Rate> getRate() {
+            return Optional.ofNullable(rate);
+        }
+
+        public void setIsPaid(Boolean isPaid) {
+            this.isPaid = isPaid;
+        }
+
+        public Optional<Boolean> getIsPaid() {
+            return Optional.ofNullable(isPaid);
         }
 
         /**
@@ -235,6 +293,11 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("day", day)
+                    .add("startTime", startTime)
+                    .add("endTime", endTime)
+                    .add("rate", rate)
+                    .add("isPaid", isPaid)
                     .add("tags", tags)
                     .toString();
         }

@@ -31,31 +31,6 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Old method: here as an overloaded because of dependencies with other parts.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.day = null;
-        this.startTime = null;
-        this.endTime = null;
-        this.rate = null;
-        this.isPaid = false;
-    }
-
-    /**
-     * Every field must be present and not null. Payment status defaults to unpaid.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Day day,
-                  Time startTime, Time endTime, Rate rate, Set<Tag> tags) {
-        this(name, phone, email, address, day, startTime, endTime, rate, false, tags);
-    }
-
-    /**
      * Every field must be present and not null. Accepts an explicit {@code isPaid} status.
      * Used when constructing a Person with a known payment state (e.g. Mark/Unmark commands).
      */
@@ -179,6 +154,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("day", day)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .add("rate", rate)
                 .add("isPaid", isPaid)
                 .add("tags", tags)
                 .toString();

@@ -31,6 +31,7 @@ public class AddTagCommand extends TagCommand {
             + PREFIX_TAG + "Mathematics";
 
     public static final String MESSAGE_SUCCESS = "Tag(s) added to person: %1$s";
+    public static final String MESSAGE_TAG_ALREADY_EXISTS = "One or more specified tags already exist for this person.";
 
     public AddTagCommand(Index targetIndex, Set<Tag> tagsToAdd) {
         super(targetIndex, tagsToAdd);
@@ -40,6 +41,9 @@ public class AddTagCommand extends TagCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToTag = getTargetPerson(model);
+        if (personToTag.getTags().stream().anyMatch(tag -> getTags().contains(tag))) {
+            throw new CommandException(MESSAGE_TAG_ALREADY_EXISTS);
+        }
         model.addTagsToPerson(personToTag, getTags());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToTag)));
     }
