@@ -23,6 +23,13 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonTest {
 
     @Test
+    public void hashCode_includesAllFields() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        Person aliceSame = new PersonBuilder(ALICE).build();
+        assertEquals(aliceCopy.hashCode(), aliceSame.hashCode());
+    }
+
+    @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));

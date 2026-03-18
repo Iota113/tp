@@ -31,14 +31,6 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null. Payment status defaults to unpaid.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Day day,
-                  Time startTime, Time endTime, Rate rate, Set<Tag> tags) {
-        this(name, phone, email, address, day, startTime, endTime, rate, false, tags);
-    }
-
-    /**
      * Every field must be present and not null. Accepts an explicit {@code isPaid} status.
      * Used when constructing a Person with a known payment state (e.g. Mark/Unmark commands).
      */
@@ -146,7 +138,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, isPaid, tags);
+        return Objects.hash(name, phone, email, address, day, startTime, endTime,
+                rate, isPaid, tags);
     }
 
     @Override
