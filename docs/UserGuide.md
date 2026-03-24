@@ -144,6 +144,9 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 **Expected output** (on success):
 > `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags:`
 
+**Expected output** (on fail):
+> `Names should contain only alphanumeric characters, with words separated by a single space or '/', e.g. 'Tan Ah Kow' or 'Raj S/O Kumar'. Names must not start or end with a space or '/', and must not contain consecutive spaces or '/' characters`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Listing all students: `list`
