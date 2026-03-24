@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 public class ConfirmCommandTest {
 
     @Test
-    public void execute_confirmClear_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ConfirmCommandTest {
     }
 
     @Test
-    public void execute_confirmClear_emptyAddressBook_success() {
+    public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -30,7 +30,7 @@ public class ConfirmCommandTest {
     }
 
     @Test
-    public void execute_confirmUnknown_returnsInvalidMessage() {
+    public void execute_unknownArgs_returnsInvalidMessage() {
         Model model = new ModelManager();
         ConfirmCommand confirmUnknown = new ConfirmCommand("delete");
 
