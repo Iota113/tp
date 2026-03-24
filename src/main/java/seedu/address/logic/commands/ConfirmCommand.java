@@ -41,4 +41,21 @@ public class ConfirmCommand extends Command {
             return new CommandResult(MESSAGE_INVALID);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ConfirmCommand)) {
+            return false;
+        }
+        ConfirmCommand otherCommand = (ConfirmCommand) other;
+        return confirmType.equals(otherCommand.confirmType);
+    }
+
+    @Override
+    public int hashCode() {
+        return confirmType.hashCode();
+    }
 }
