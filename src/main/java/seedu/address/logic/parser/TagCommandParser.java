@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,7 +20,8 @@ public class TagCommandParser implements Parser<Command> {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Executes a tag subcommand.\n"
             + "Subcommands:\n"
             + "  " + AddTagCommand.MESSAGE_USAGE + "\n"
-            + "  " + DeleteTagCommand.MESSAGE_USAGE;
+            + "  " + DeleteTagCommand.MESSAGE_USAGE + "\n"
+            + "  " + FindTagCommand.MESSAGE_USAGE;
 
     @Override
     public Command parse(String userInput) throws ParseException {
@@ -37,6 +39,9 @@ public class TagCommandParser implements Parser<Command> {
         }
         if (subcommand.equals(DeleteTagCommand.SUBCOMMAND_WORD)) {
             return new DeleteTagCommandParser().parse(subcommandArgs);
+        }
+        if (subcommand.equals(FindTagCommand.SUBCOMMAND_WORD)) {
+            return new FindTagCommandParser().parse(subcommandArgs);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));

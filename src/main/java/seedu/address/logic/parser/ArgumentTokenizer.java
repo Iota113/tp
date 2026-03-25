@@ -47,11 +47,14 @@ public class ArgumentTokenizer {
     private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();
 
-        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
+        int fromIndex = 0;
+        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), fromIndex);
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+            // Move fromIndex forward to avoid infinite loop
+            fromIndex = prefixPosition + prefix.getPrefix().length();
+            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), fromIndex);
         }
 
         return positions;
@@ -70,9 +73,13 @@ public class ArgumentTokenizer {
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
+        // Check for prefix at the very start (index 0)
+        if (argsString.startsWith(prefix, fromIndex)) {
+            return fromIndex;
+        }
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+            : prefixIndex + 1; // +1 as offset for whitespace
     }
 
     /**
