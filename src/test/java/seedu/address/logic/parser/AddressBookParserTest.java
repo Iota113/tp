@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ConfirmCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -47,21 +46,50 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    public void parseCommand_clear_returnsPrompt() throws Exception {
+        ClearCommand command = (ClearCommand) parser.parseCommand(ClearCommand.COMMAND_WORD);
+        assertEquals(new ClearCommand(ClearCommand.ClearState.PROMPT), command);
     }
 
     @Test
-    public void parseCommand_confirm() throws Exception {
-        ConfirmCommand command = (ConfirmCommand) parser.parseCommand("confirm clear");
-        assertEquals(new ConfirmCommand("clear"), command);
+    public void parseCommand_clearThenY_returnsConfirmed() throws Exception {
+        parser.parseCommand(ClearCommand.COMMAND_WORD);
+        ClearCommand command = (ClearCommand) parser.parseCommand("y");
+        assertEquals(new ClearCommand(ClearCommand.ClearState.CONFIRMED), command);
     }
 
     @Test
-    public void parseCommand_confirmEmpty() throws Exception {
-        ConfirmCommand command = (ConfirmCommand) parser.parseCommand("confirm ");
-        assertEquals(new ConfirmCommand(""), command);
+    public void parseCommand_clearThenUpperY_returnsConfirmed() throws Exception {
+        parser.parseCommand(ClearCommand.COMMAND_WORD);
+        ClearCommand command = (ClearCommand) parser.parseCommand("Y");
+        assertEquals(new ClearCommand(ClearCommand.ClearState.CONFIRMED), command);
+    }
+
+    @Test
+    public void parseCommand_clearThenN_returnsAborted() throws Exception {
+        parser.parseCommand(ClearCommand.COMMAND_WORD);
+        ClearCommand command = (ClearCommand) parser.parseCommand("n");
+        assertEquals(new ClearCommand(ClearCommand.ClearState.ABORTED), command);
+    }
+
+    @Test
+    public void parseCommand_clearThenUpperN_returnsAborted() throws Exception {
+        parser.parseCommand(ClearCommand.COMMAND_WORD);
+        ClearCommand command = (ClearCommand) parser.parseCommand("N");
+        assertEquals(new ClearCommand(ClearCommand.ClearState.ABORTED), command);
+    }
+
+    @Test
+    public void parseCommand_clearThenInvalidInput_throwsParseException() throws Exception {
+        parser.parseCommand(ClearCommand.COMMAND_WORD);
+        assertThrows(ParseException.class, () -> parser.parseCommand("maybe"));
+    }
+
+    @Test
+    public void parseCommand_clearConfirmWithoutClear_throwsParseException() {
+        // bypass attempt — should fail as unknown command
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("confirm clear"));
     }
 
     @Test
@@ -70,6 +98,7 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
+
 
     @Test
     public void parseCommand_edit() throws Exception {

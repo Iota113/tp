@@ -12,18 +12,30 @@ import seedu.address.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_prompt_showsConfirmMessage() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_CONFIRM, expectedModel);
+        assertCommandSuccess(new ClearCommand(ClearCommand.ClearState.PROMPT),
+                model, ClearCommand.MESSAGE_CONFIRM_PROMPT, expectedModel);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_aborted_showsAbortMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_CONFIRM, expectedModel);
+        // Model should be unchanged after abort
+        assertCommandSuccess(new ClearCommand(ClearCommand.ClearState.ABORTED),
+                model, ClearCommand.MESSAGE_ABORTED, expectedModel);
+    }
+
+    @Test
+    public void execute_confirmed_emptyAddressBook() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager();
+
+        assertCommandSuccess(new ClearCommand(ClearCommand.ClearState.CONFIRMED),
+                model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
