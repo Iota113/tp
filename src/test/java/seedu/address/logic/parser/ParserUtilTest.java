@@ -9,10 +9,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Day;
@@ -63,6 +65,49 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndices_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIndices(null));
+    }
+
+    @Test
+    public void parseIndices_emptyString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices("  "));
+    }
+
+    @Test
+    public void parseIndices_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices("a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices("1 a 2"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices("0 1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices("-1 2"));
+    }
+
+    @Test
+    public void parseIndices_singleValidValue_returnsSingletonList() throws Exception {
+        List<Index> result = ParserUtil.parseIndices("1");
+        assertEquals(List.of(Index.fromOneBased(1)), result);
+    }
+
+    @Test
+    public void parseIndices_multipleValidValues_returnsList() throws Exception {
+        List<Index> result = ParserUtil.parseIndices("1 2 3");
+        assertEquals(List.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3)), result);
+    }
+
+    @Test
+    public void parseIndices_duplicateValues_deduplicatesPreservingOrder() throws Exception {
+        List<Index> result = ParserUtil.parseIndices("1 2 1 3 2");
+        assertEquals(List.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3)), result);
+    }
+
+    @Test
+    public void parseIndices_extraWhitespace_returnsList() throws Exception {
+        List<Index> result = ParserUtil.parseIndices("  1   2   3  ");
+        assertEquals(List.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3)), result);
     }
 
     @Test
