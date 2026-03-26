@@ -135,18 +135,23 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 (case-insensitive) **and** the **same phone number**.
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Rationale for duplicate detection:**
-OnlyTutors considers two contacts duplicates if they have the <strong>same name (case-insensitive)</strong> 
-and <strong>same phone number</strong>.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Rationale for duplicate detection:**
+
+OnlyTutors considers two contacts duplicates if they have the **same name (case-insensitive)** and **same phone number**.
 
 This design is chosen because:
+
 * Names alone are not unique (e.g. many students may share the same name)
 * Phone numbers alone are not reliable (e.g. siblings may share a parent’s number)
 * Combining both provides a practical and reliable identifier for tutors
 
-Additionally:
-* Duplicate detection is case-insensitive (e.g. <code>john doe</code> = <code>John Doe</code>)
+**Additionally:**
+
+* Duplicate detection is case-insensitive (e.g. `john doe` = `John Doe`)
 * Names are displayed exactly as entered to preserve user formatting
+
 </div>
 
 **Examples:**
