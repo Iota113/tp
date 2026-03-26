@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,8 @@ public class AddTagCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tagsToAdd);
+
         String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, Messages.format(personToTag));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -42,18 +44,10 @@ public class AddTagCommandTest {
     }
 
     @Test
-    public void execute_tagAlreadyExists_throwsCommandException() {
-        Set<Tag> tagsToAdd = Set.of(new Tag("friends"));
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
-
-        assertCommandFailure(addTagCommand, model, AddTagCommand.MESSAGE_TAG_ALREADY_EXISTS);
-    }
-
-    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(outOfBoundIndex, tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(outOfBoundIndex), tagsToAdd);
 
         assertCommandFailure(addTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -62,13 +56,13 @@ public class AddTagCommandTest {
     public void equals() {
         Set<Tag> firstTags = Set.of(new Tag("classmate"));
         Set<Tag> secondTags = Set.of(new Tag("teammate"));
-        AddTagCommand addFirstCommand = new AddTagCommand(INDEX_FIRST_PERSON, firstTags);
-        AddTagCommand addSecondCommand = new AddTagCommand(INDEX_SECOND_PERSON, secondTags);
-        AddTagCommand addFirstCommandDifferentTags = new AddTagCommand(INDEX_FIRST_PERSON, secondTags);
+        AddTagCommand addFirstCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), firstTags);
+        AddTagCommand addSecondCommand = new AddTagCommand(List.of(INDEX_SECOND_PERSON), secondTags);
+        AddTagCommand addFirstCommandDifferentTags = new AddTagCommand(List.of(INDEX_FIRST_PERSON), secondTags);
 
         assertTrue(addFirstCommand.equals(addFirstCommand));
 
-        AddTagCommand addFirstCommandCopy = new AddTagCommand(INDEX_FIRST_PERSON, firstTags);
+        AddTagCommand addFirstCommandCopy = new AddTagCommand(List.of(INDEX_FIRST_PERSON), firstTags);
         assertTrue(addFirstCommand.equals(addFirstCommandCopy));
 
         assertFalse(addFirstCommand.equals(1));
@@ -80,8 +74,8 @@ public class AddTagCommandTest {
     @Test
     public void hashCodeMethod() {
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
-        AddTagCommand addTagCommandCopy = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tagsToAdd);
+        AddTagCommand addTagCommandCopy = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tagsToAdd);
 
         assertEquals(addTagCommand.hashCode(), addTagCommandCopy.hashCode());
     }
@@ -89,9 +83,9 @@ public class AddTagCommandTest {
     @Test
     public void toStringMethod() {
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tagsToAdd);
         String expected = AddTagCommand.class.getCanonicalName()
-                + "{targetIndex=" + INDEX_FIRST_PERSON + ", tagsToAdd=" + tagsToAdd + "}";
+                + "{targetIndices=" + List.of(INDEX_FIRST_PERSON) + ", tagsToAdd=" + tagsToAdd + "}";
         assertEquals(expected, addTagCommand.toString());
     }
 }

@@ -123,10 +123,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_tag() throws Exception {
         AddTagCommand addTagCommand = (AddTagCommand) parser.parseCommand("tag add 1 t/friends");
-        assertEquals(new AddTagCommand(INDEX_FIRST_PERSON, java.util.Set.of(new Tag("friends"))), addTagCommand);
+        assertEquals(new AddTagCommand(List.of(INDEX_FIRST_PERSON), java.util.Set.of(new Tag("friends"))),
+                addTagCommand);
 
         DeleteTagCommand deleteTagCommand = (DeleteTagCommand) parser.parseCommand("tag delete 1 t/friends");
-        assertEquals(new DeleteTagCommand(INDEX_FIRST_PERSON, java.util.Set.of(new Tag("friends"))),
+        assertEquals(new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), java.util.Set.of(new Tag("friends"))),
                 deleteTagCommand);
     }
 

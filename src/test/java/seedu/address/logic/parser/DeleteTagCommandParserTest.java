@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Set<Tag> tags = Set.of(new Tag("classmate"), new Tag("friend"));
-        DeleteTagCommand expectedCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, tags);
+        DeleteTagCommand expectedCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tags);
         assertParseSuccess(parser, "1" + TAG_DESC_FRIEND + " t/classmate", expectedCommand);
     }
 

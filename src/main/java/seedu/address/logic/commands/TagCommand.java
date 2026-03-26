@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,28 +21,32 @@ public abstract class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndices;
     private final Set<Tag> tags;
 
-    protected TagCommand(Index targetIndex, Set<Tag> tags) {
-        requireNonNull(targetIndex);
+    protected TagCommand(List<Index> targetIndices, Set<Tag> tags) {
+        requireNonNull(targetIndices);
         requireNonNull(tags);
-        this.targetIndex = targetIndex;
+        this.targetIndices = new ArrayList<>(targetIndices);
         this.tags = new HashSet<>(tags);
     }
 
-    protected Person getTargetPerson(Model model) throws CommandException {
+    protected List<Person> getTargetPersons(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> targetPersons = new ArrayList<>();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index index : targetIndices) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            targetPersons.add(lastShownList.get(index.getZeroBased()));
         }
 
-        return lastShownList.get(targetIndex.getZeroBased());
+        return targetPersons;
     }
 
-    protected Index getTargetIndex() {
-        return targetIndex;
+    protected List<Index> getTargetIndices() {
+        return new ArrayList<>(targetIndices);
     }
 
     protected Set<Tag> getTags() {
