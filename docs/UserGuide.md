@@ -213,15 +213,21 @@ Edits the details of an existing student in OnlyTutors.
 * Edits the student at the specified `INDEX` (a positive integer: 1, 2, 3, …).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags with `t/`, existing tags are **replaced entirely**. To add tags without replacing, use [`tag add`](#adding-tags-to-a-student-tag-add) instead.
-* Remove all tags by typing `t/` without specifying any tags after it.
+
+**Editing Tags:**
+* When editing tags with `t/`, existing tags are **replaced entirely**. 
+* Remove all tags by typing `t/` without specifying any tags after it (not true for other fields since they must be nonempty).
+* Note the same rules for adding a person apply here, i.e. person name must contain only alphabets, end time must be strictly after start time and so on.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 Editing tags with the `edit` command **replaces all existing tags**. If a student has tags `math` and `primary3`, running `edit 1 t/science` will result in only the `science` tag remaining.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To add tags without replacing, use [`tag add`](#adding-tags-to-a-student-tag-add) instead.
+</div>
+
 <div markdown="block" class="alert alert-info">
-**Note: the same rules for adding a person applies here, i.e. person name must contain only alphabets, end time must be strictly after start time and so on.**
 </div>
 
 **Examples:**
@@ -233,7 +239,7 @@ Editing tags with the `edit` command **replaces all existing tags**. If a studen
 | `edit 3 d/Friday st/14:00 et/16:00` | Changes the lesson day and time for the 3rd student |
 
 **Expected output** (on success):
-> `Edited Person: Betsy Crowe; Phone: ...`
+> `Edited Person: Elliot; Phone: ...`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -452,10 +458,10 @@ OnlyTutors data is saved to the hard disk automatically after any command that c
 
 ### Editing the data file
 
-OnlyTutors data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that file.
+OnlyTutors data is saved automatically as a JSON file at `[JAR file location]/data/onlytutors.json`. Advanced users are welcome to update data directly by editing that file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If your changes to the data file make its format invalid, OnlyTutors will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it. Furthermore, certain edits can cause OnlyTutors to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file make its format invalid, OnlyTutors may discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it. Furthermore, certain edits can cause OnlyTutors to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
