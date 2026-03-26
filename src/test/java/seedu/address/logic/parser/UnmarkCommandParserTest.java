@@ -4,6 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +25,13 @@ public class UnmarkCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsUnmarkCommand() {
-        assertParseSuccess(parser, "1", new UnmarkCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new UnmarkCommand(List.of(INDEX_FIRST_PERSON)));
+    }
+
+    @Test
+    public void parse_multipleValidArgs_returnsUnmarkCommand() {
+        assertParseSuccess(parser, "1 2",
+                new UnmarkCommand(List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON)));
     }
 
     @Test

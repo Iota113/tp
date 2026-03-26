@@ -96,7 +96,7 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteCommand(List.of(INDEX_FIRST_PERSON)), command);
     }
 
 
@@ -139,23 +139,24 @@ public class AddressBookParserTest {
     public void parseCommand_mark() throws Exception {
         MarkCommand command = (MarkCommand) parser.parseCommand(
                 MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new MarkCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new MarkCommand(List.of(INDEX_FIRST_PERSON)), command);
     }
 
     @Test
     public void parseCommand_unmark() throws Exception {
         UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
                 UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnmarkCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new UnmarkCommand(List.of(INDEX_FIRST_PERSON)), command);
     }
 
     @Test
     public void parseCommand_tag() throws Exception {
         AddTagCommand addTagCommand = (AddTagCommand) parser.parseCommand("tag add 1 t/friends");
-        assertEquals(new AddTagCommand(INDEX_FIRST_PERSON, java.util.Set.of(new Tag("friends"))), addTagCommand);
+        assertEquals(new AddTagCommand(List.of(INDEX_FIRST_PERSON), java.util.Set.of(new Tag("friends"))),
+                addTagCommand);
 
         DeleteTagCommand deleteTagCommand = (DeleteTagCommand) parser.parseCommand("tag delete 1 t/friends");
-        assertEquals(new DeleteTagCommand(INDEX_FIRST_PERSON, java.util.Set.of(new Tag("friends"))),
+        assertEquals(new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), java.util.Set.of(new Tag("friends"))),
                 deleteTagCommand);
     }
 

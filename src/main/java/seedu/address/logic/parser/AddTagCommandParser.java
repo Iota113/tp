@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -24,11 +25,12 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         }
 
         try {
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            List<Index> indices = ParserUtil.parseIndices(argMultimap.getPreamble());
             Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            return new AddTagCommand(index, tags);
+            return new AddTagCommand(indices, tags);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
         }
     }
 }

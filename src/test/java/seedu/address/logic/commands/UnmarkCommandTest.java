@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -34,7 +36,7 @@ public class UnmarkCommandTest {
         Person paidPerson = new PersonBuilder(personToUnmark).withPaid(true).build();
         model.setPerson(personToUnmark, paidPerson);
 
-        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON));
 
         Person unmarkedPerson = new PersonBuilder(paidPerson).withPaid(false).build();
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS,
@@ -49,7 +51,7 @@ public class UnmarkCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UnmarkCommand unmarkCommand = new UnmarkCommand(outOfBoundIndex);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(outOfBoundIndex));
 
         assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -64,7 +66,7 @@ public class UnmarkCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON));
 
         Person unmarkedPerson = new PersonBuilder(personInFilteredList).withPaid(false).build();
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS,
@@ -84,7 +86,7 @@ public class UnmarkCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        UnmarkCommand unmarkCommand = new UnmarkCommand(outOfBoundIndex);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(outOfBoundIndex));
 
         assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -92,21 +94,45 @@ public class UnmarkCommandTest {
     @Test
     public void execute_alreadyUnpaid_throwsCommandException() {
         // Typical persons default to isPaid = false
-        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON));
 
         assertCommandFailure(unmarkCommand, model, UnmarkCommand.MESSAGE_ALREADY_UNPAID);
     }
 
     @Test
+    public void execute_batchValidIndicesUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person paidFirst = new PersonBuilder(firstPerson).withPaid(true).build();
+        Person paidSecond = new PersonBuilder(secondPerson).withPaid(true).build();
+        model.setPerson(firstPerson, paidFirst);
+        model.setPerson(secondPerson, paidSecond);
+
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON));
+
+        Person unmarkedFirst = new PersonBuilder(paidFirst).withPaid(false).build();
+        Person unmarkedSecond = new PersonBuilder(paidSecond).withPaid(false).build();
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(paidFirst, unmarkedFirst);
+        expectedModel.setPerson(paidSecond, unmarkedSecond);
+
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSONS_SUCCESS,
+                2, unmarkedFirst.getName() + ", " + unmarkedSecond.getName());
+
+        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
-        UnmarkCommand unmarkFirstCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
-        UnmarkCommand unmarkSecondCommand = new UnmarkCommand(INDEX_SECOND_PERSON);
+        UnmarkCommand unmarkFirstCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON));
+        UnmarkCommand unmarkSecondCommand = new UnmarkCommand(List.of(INDEX_SECOND_PERSON));
 
         // same object -> returns true
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
 
         // same values -> returns true
-        UnmarkCommand unmarkFirstCommandCopy = new UnmarkCommand(INDEX_FIRST_PERSON);
+        UnmarkCommand unmarkFirstCommandCopy = new UnmarkCommand(List.of(INDEX_FIRST_PERSON));
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommandCopy));
 
         // different types -> returns false
@@ -122,8 +148,8 @@ public class UnmarkCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        UnmarkCommand unmarkCommand = new UnmarkCommand(targetIndex);
-        String expected = UnmarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(targetIndex));
+        String expected = UnmarkCommand.class.getCanonicalName() + "{targetIndices=[" + targetIndex + "]}";
         assertEquals(expected, unmarkCommand.toString());
     }
 }

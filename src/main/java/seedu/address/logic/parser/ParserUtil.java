@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -36,6 +39,29 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code indicesString} containing one or more space-separated one-based indices
+     * into a {@code List<Index>}. Duplicates are removed while preserving order.
+     * Leading and trailing whitespace is trimmed.
+     * @throws ParseException if any index is invalid (not a non-zero unsigned integer).
+     */
+    public static List<Index> parseIndices(String indicesString) throws ParseException {
+        requireNonNull(indicesString);
+        String trimmed = indicesString.trim();
+        if (trimmed.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        String[] parts = trimmed.split("\\s+");
+        LinkedHashSet<Index> seen = new LinkedHashSet<>();
+        for (String part : parts) {
+            if (!StringUtil.isNonZeroUnsignedInteger(part)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            seen.add(Index.fromOneBased(Integer.parseInt(part)));
+        }
+        return new ArrayList<>(seen);
     }
 
     /**
