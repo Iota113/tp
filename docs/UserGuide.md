@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-**OnlyTutors** is a desktop app for **private tutors in Singapore** to manage students, lessons, and payments. It is optimised for use via a **Command Line Interface (CLI)** with the benefits of a Graphical User Interface (GUI). If you can type fast, OnlyTutors helps you manage your tutoring business faster than traditional apps.
+**OnlyTutors** is a desktop app for **private tutors in Singapore** to manage students, lessons, and payments. It is optimised for use via a **Command Line Interface (CLI)** with the benefits of a Graphical User Interface (GUI). OnlyTutors helps you manage your tutoring business more effectively than traditional apps by combining allowing you to maintain various data not seen in traditional apps.
 
 **Who is this guide for?** Private tutors who are comfortable typing commands and want a fast, no-frills way to keep track of their students.
 
@@ -170,19 +170,23 @@ This design is chosen because:
 
 ### ⚠️ Common mistakes when adding a student
 
-| Mistake | Why it fails                                   |
-|--------|------------------------------------------------|
-| `r/$40` | Symbols are not allowed; rate must be a number |
-| `r/40.0` | Decimals are not allowed; must be an integer   |
-| `n/John123` | Name cannot contain numbers                    |
-| `n/` | Name cannot be empty                           |
-| `p/12345678` | Must start with 6, 8, or 9                     |
-| `d/Mon` | Must use full day name (e.g. Monday)           |
-| `st/3pm` | Must use 24-hour format (e.g. 15:00)           |
-| `et/14:00 st/15:00` | End time must be after start time              |
+| Mistake | Why it fails                                     |
+|--------|--------------------------------------------------|
+| `r/$40` | Symbols are not allowed; rate must be a number   |
+| `r/40.0` | Decimals are not allowed; must be a whole number |
+| `n/John123` | Name cannot contain numbers                      |
+| `n/` | Name cannot be empty                             |
+| `p/12345678` | Must start with 6, 8, or 9                       |
+| `d/Mon` | Must use full day name (e.g. Monday)             |
+| `st/3pm` | Must use 24-hour format (e.g. 15:00)             |
+| `et/14:00 st/15:00` | End time must be after start time                |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Always follow the exact formats shown in the examples to avoid errors.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Rationale for disallowing decimals: Most tutoring roles pay whole number rates anyway, so we enforce this to remove clutter in the UI.**
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -348,7 +352,7 @@ Adds one or more tags to a student **without replacing** existing tags.
 * The index **must be a positive integer** (1, 2, 3, …).
 * At least one tag must be provided.
 * Tags are alphanumeric only (no spaces) and are stored in lowercase.
-* If any of the specified tags already exist on a student, the command will fail.
+* If any of the specified tags already exist on a student, the command will fail and none of the tags will be added.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can tag multiple students at once by specifying multiple indices. e.g. `tag add 1 2 3 t/math` adds the `math` tag to the 1st, 2nd, and 3rd students.
@@ -378,7 +382,7 @@ Removes one or more tags from a student.
 * Removes the specified tag(s) from the student(s) at the specified `INDEX`(es).
 * The index **must be a positive integer** (1, 2, 3, …).
 * At least one tag must be provided.
-* If any of the specified tags do not exist on a student, the command will fail.
+* If any of the specified tags do not exist on a student, the command will fail and none of the tags will be deleted.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can remove tags from multiple students at once by specifying multiple indices. e.g. `tag delete 1 2 3 t/math` removes the `math` tag from the 1st, 2nd, and 3rd students.
