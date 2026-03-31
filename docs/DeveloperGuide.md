@@ -443,6 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. OnlyTutors detects that one or more specified tags do not exist on the student
   * 2a1. OnlyTutors shows an error message.
+  * 2a2. No tags are deleted from the student.
 
     Use case ends.
 
