@@ -3,11 +3,15 @@ layout: page
 title: User Guide
 ---
 
-**OnlyTutors** is a desktop app for **private tutors in Singapore** to manage students, lessons, and payments. It is optimised for use via a **Command Line Interface (CLI)** with the benefits of a Graphical User Interface (GUI). OnlyTutors helps you manage your tutoring business more effectively than traditional apps by combining allowing you to maintain various data not seen in traditional apps.
+**OnlyTutors** is a desktop management suite purpose-built for private tutors in Singapore to streamline students, lessons, and payments.
+
+While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard.
+
+OnlyTutors helps you manage your tutoring business more effectively than traditional apps by allowing you to maintain various data not seen in traditional apps.
 
 **Who is this guide for?** Private tutors who are comfortable typing commands and want a fast, no-frills way to keep track of their students.
 
-**What does OnlyTutors assume?** You have basic familiarity with using a computer and typing commands. No programming knowledge is required.
+**What does OnlyTutors assume?** OnlyTutors assumes you are comfortable with basic typing and following command syntax. No programming knowledge is required.
 
 * Table of Contents
 {:toc}
@@ -271,6 +275,10 @@ This design is chosen because:
 | `d/Mon` | Must use full day name (e.g. Monday)             |
 | `st/3pm` | Must use 24-hour format (e.g. 15:00)             |
 | `et/14:00 st/15:00` | End time must be after start time                |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: We use whole numbers to streamline the UI, as they reflect the standard pay rates for most tutoring roles.**
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
