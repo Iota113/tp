@@ -6,7 +6,7 @@ start
 if () then ([User keys in 'y'])
     :Clear Contact List;
     :Show Success Message;
-else ([Otherwise])
+else ([User keys in any other input])
     :Abort Clearing;
     :Show Aborted Message;
 endif
