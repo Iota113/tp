@@ -7,7 +7,7 @@ title: User Guide
 
 While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the lightning-fast efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard.
 
-OnlyTutors helps you manage your tutoring business more effectively than traditional apps by combining allowing you to maintain various data not seen in traditional apps.
+OnlyTutors helps you manage your tutoring business more effectively than traditional apps by allowing you to maintain various data not seen in traditional apps.
 
 **Who is this guide for?** Private tutors who are comfortable typing commands and want a fast, no-frills way to keep track of their students.
 
