@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+show attributes
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
@@ -12,13 +13,18 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueLessonList
+Class Lesson {
+    - isPaid: boolean
+}
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Day
+Class Time
+Class Rate
 
 Class I #FFFFFF
 }
@@ -35,20 +41,27 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueLessonList
+UniqueLessonList -left-> "~* all" Lesson
+Lesson *--> Name
+Lesson *--> Phone
+Lesson *--> Email
+Lesson *--> Address
+Lesson *--> "*" Tag
+Lesson *--> "1" Day
+Lesson *--> "1" Time : startTime
+Lesson *--> "1" Time : endTime
+Lesson *--> "1" Rate
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Lesson -[hidden]up--> I
+UniqueLessonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
-
-ModelManager --> "~* filtered" Person
+Email -[hidden]right-> Tag
+Tag -[hidden]right-> Day
+Day -[hidden]right-> Time
+Time -[hidden]right-> Rate
+ModelManager --> "~* filtered" Lesson
 @enduml
