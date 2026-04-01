@@ -1,0 +1,14 @@
+@startuml
+start
+:User inputs clear command;
+:Show confirmation dialog;
+:Read User Input;
+if () then ([User keys in 'y'])
+    :Clear Contact List;
+    :Show Success Message;
+else ([User keys in any other input])
+    :Abort Clearing;
+    :Show Aborted Message;
+endif
+stop
+@enduml

@@ -172,6 +172,28 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Confirmation for Clear Feature
+
+#### Implementation
+
+The clear confirmation mechanism is designed to prevent accidental data loss. When a user inputs the `clear` command, instead of immediately purging the `Model`, the system transitions to a 'pending confirmation' state.
+
+The following activity diagram summarizes the workflow when a user executes the clear command:
+
+<img src="images/ClearActivityDiagram.png" width="300" />
+
+#### Design considerations:
+
+**Aspect: How the confirmation is handled:**
+
+* **Alternative 1 (current choice):** Internal state flag in `LogicManager`.
+    * Pros: Simple to implement within the existing command execution flow.
+    * Cons: Increases complexity of the `Logic` component state.
+
+* **Alternative 2:** Use a specialized `ConfirmCommand`.
+    * Pros: Keeps commands atomic and follows the Command Pattern more strictly.
+    * Cons: Requires more boilerplate code to pass the intended action to the confirmation handler.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
