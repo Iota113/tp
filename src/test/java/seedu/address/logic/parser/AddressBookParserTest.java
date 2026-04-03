@@ -80,9 +80,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clearThenInvalidInput_throwsParseException() throws Exception {
+    public void parseCommand_clearThenInvalidInput_returnsAborted() throws Exception {
         parser.parseCommand(ClearCommand.COMMAND_WORD);
-        assertThrows(ParseException.class, () -> parser.parseCommand("maybe"));
+        ClearCommand command = (ClearCommand) parser.parseCommand("maybe");
+        assertEquals(new ClearCommand(ClearCommand.ClearState.ABORTED), command);
     }
 
     @Test

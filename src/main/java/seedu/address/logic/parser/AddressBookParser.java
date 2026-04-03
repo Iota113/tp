@@ -45,14 +45,15 @@ public class AddressBookParser {
         if (awaitingClearConfirmation) {
             awaitingClearConfirmation = false;
             String input = userInput.trim();
+
+            // Only "y" (case-insensitive) confirms the clear
             if (input.equalsIgnoreCase("y")) {
                 return new ClearCommand(ClearCommand.ClearState.CONFIRMED);
-            } else if (input.equalsIgnoreCase("n")) {
-                return new ClearCommand(ClearCommand.ClearState.ABORTED);
             }
-            throw new ParseException("Invalid input. Type 'y' to confirm or 'n' to abort.");
-        }
 
+            // Any other input (including "n", "no", "asdf", etc.) aborts
+            return new ClearCommand(ClearCommand.ClearState.ABORTED);
+        }
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
