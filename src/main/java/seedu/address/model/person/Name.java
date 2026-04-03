@@ -10,16 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should contain only alphanumeric characters, with words separated by a single space or '/', "
+            "Names should contain only English characters, with words separated by a single space or '/', "
                     + "e.g. 'Tan Ah Kow' or 'Raj S/O Kumar'. "
                     + "Names must not start or end with a space or '/', "
                     + "and must not contain consecutive spaces or '/' characters";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * 1. Must start with a letter: [a-zA-Z]
+     * 2. Can be followed by sequences of a single space/slash and a letter: ([ /][a-zA-Z])*
+     * 3. This ensures no consecutive symbols and no trailing symbols.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} /]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z]+(([ /][a-zA-Z])?[a-zA-Z]*)*$";
 
     public final String fullName;
 
@@ -29,6 +30,7 @@ public class Name {
      * @param name A valid name.
      */
     public Name(String name) {
+        name = name.trim();
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
